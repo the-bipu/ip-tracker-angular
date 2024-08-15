@@ -16,7 +16,7 @@ export class MapComponent implements AfterViewInit {
   latString: string = '';
   lngString: string = '';
 
-  constructor(private service: SharedService) { 
+  constructor(private service: SharedService) {
     //get all necessary data
     service.ip$.subscribe((ip: string) => {
       this.ip = ip;
@@ -34,27 +34,41 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined') {
-      this.initMap();
+      this.initMap().then(() => {
+        this.getValues();
+      });
     }
   }
 
   private async initMap(): Promise<void> {
-    const L = (await import('leaflet')).default;
-    this.map = L.map('map', {
-      center: [this.lat, this.lng],
-      zoom: 10
-    });
+    try {
+      const L = (await import('leaflet')).default;
+      this.map = L.map('map', {
+        center: [this.lat, this.lng],
+        zoom: 10
+      });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
+      const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 3,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
 
-    tiles.addTo(this.map);
+      tiles.addTo(this.map);
+    } catch (error) {
+      console.error('Failed to initialize map:', error);
+    }
   }
 
+
   getValues(): void {
+    console.log('Map:', this.map); // Add this line to check if map is initialized
+
+    if (!this.map) {
+      console.error('Map is not initialized.');
+      return;
+    }
+
     this.latString = this.data ? this.data.lat : '';
     this.lngString = this.data ? this.data.lng : '';
 
@@ -66,10 +80,11 @@ export class MapComponent implements AfterViewInit {
 
       const marker = (window as any).L.marker([this.lat, this.lng]);
       marker.addTo(this.map);
-      marker.bindPopup(this.ip === '' 
-        ? "<b>Hey!!</b><br>This is your public IP." 
+      marker.bindPopup(this.ip === ''
+        ? "<b>Hey!!</b><br>This is your public IP."
         : "<b>Hey!!</b><br>This IP is what you're looking for."
       ).openPopup();
     }
   }
+
 }
