@@ -1,42 +1,38 @@
 <main>
+
   <div class="first--banner">
     <h1 class="heading--main">IP Address Tracker</h1>
     <form class="input--div">
-      <input type="text" placeholder="Search for any IP address or domain" />
-      <button type="submit" class="submit--btn">
+      <input [(ngModel)]="IP" type="text" placeholder="Search for any IP address or domain" />
+      <button type="submit" class="submit--btn" (click)="search()">
         <img src="/images/icon-arrow.svg" alt="icon arrow" class="arrowIcon" />
       </button>
     </form>
   </div>
+
   <div class="data--section">
     <div class="maindata--div">
       <div class="single--div">
         <span class="data--heading">IP Address</span>
-        <span class="main--data">{{ data.id }}</span>
+        <span class="main--data"> {{ ip !== "-1" ? ip : "loading..." }} </span>
       </div>
       <div class="single--div side--border">
         <span class="data--heading">Location</span>
-        <span class="main--data">{{ data.title }}</span>
+        <span class="main--data"> {{ ip !== "-1" ? region+country+postalCode : "loading..." }} </span>
       </div>
       <div class="single--div side--border">
         <span class="data--heading">Timezone</span>
-        <span class="main--data">UTC - {{ data.title }}</span>
+        <span class="main--data"> {{ ip !== "-1" ? timeZone : "loading..." }} </span>
       </div>
       <div class="single--div side--border">
         <span class="data--heading">ISP</span>
-        <span class="main--data">{{ data.title }}</span>
+        <span class="main--data"> {{ip !== "-1" ?  isp : "loading..."}} </span>
       </div>
     </div>
   </div>
+
   <div class="second--banner">
-    <div id="map">
-      <a
-        href="https://www.maptiler.com"
-        style="position: absolute; left: 10px; bottom: 10px; z-index: 999"
-        ><img
-          src="https://api.maptiler.com/resources/logo.svg"
-          alt="MapTiler logo"
-      /></a>
-    </div>
+    <app-map></app-map>
   </div>
+  
 </main>
