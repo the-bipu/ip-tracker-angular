@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@font-face {
+  font-family: 'Rubik';
+  src: url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+  font-display: swap;
+}
 
 :host {
   --bright-blue: oklch(51.01% 0.274 263.83);
