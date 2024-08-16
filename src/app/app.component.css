@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Rubik';
-  src: url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+  font-family: "Rubik";
+  src: url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
   font-display: swap;
 }
 
@@ -115,7 +115,7 @@ main {
   width: 100%;
   height: 66%;
   position: relative;
-  min-height: 400px;
+  min-height: 450px;
   overflow: hidden;
 }
 
@@ -173,5 +173,90 @@ main {
 .main--data {
   color: hsl(0, 0%, 17%);
   font-size: 1.7rem;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 575px) {
+
+  /* Result shown here */
+  .data--section {
+    width: 80%;
+    height: 300px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+  
+    display: flex;
+    align-items: center;
+  }
+
+  .maindata--div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .main--data {
+    color: hsl(0, 0%, 17%);
+    font-size: 1rem;
+    font-weight: 600;
+  } 
+
+  .single--div {
+    width: 90%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  
+    gap: 6px;
+  }
+  
+  .side--border {
+    border-left: none;
+  }
+
+  /* Input taken from here */
+  .input--div {
+    width: 90%;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  
+  .input--div input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-indent: 1rem;
+  }
+  
+  .input--div input::placeholder {
+    font-weight: 500;
+    font-size: 16px;
+  }
+  
+  /* First Banner */
+  .first--banner {
+    width: 100%;
+    height: 44vh;
+    background-image: url("../../public/images/pattern-bg-desktop.png");
+    padding: 36px 0 0 0;
+  }
+
+  .second--banner {
+    width: 100%;
+    height: 56vh;
+    position: relative;
+    min-height: 450px;
+    overflow: hidden;
+  }
 }
